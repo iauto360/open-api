@@ -18,7 +18,7 @@
 4. 拼接tokon、salt合成一个新字符串tokenSalt，采用sha1散列tokenSalt并使用16进制表示得到tokenSign。<br/>
     String tokenSalt = token + salt;     // tokenSalt = "405d1a6d598c7e27d33c8aff92efde76GIx8VA8x6RhFXwp" <br>
     String tokenSign = sha1Encode(tokenSalt);    // tokenSign = "22f10f84edefed2dbeb754cd10ffd610bb923611"
-5. 采用post方式发送json格式的数据到平台接口https://open.iauto360.cn/api/auth/userinfo。由于车智汇平台采用自行颁发的服务证书，请使用接口时忽略证书验证。<br/>
+5. 采用post方式发送json格式的数据到平台接口https://open.iauto360.cn/api/auth/userinfo。 由于车智汇平台采用自行颁发的服务证书，请使用接口时忽略证书验证。<br/>
     `{"appid":"2of7u147s7dEulAJkx9rPNtwsAc","token":"405d1a6d598c7e27d33c8aff92efde76","tokenSign":"22f10f84edefed2dbeb754cd10ffd610bb923611","req":["mobile"]}`<br/>
      * appid:[接入前提1]获取
      * token:[接入流程3]获取到的token
