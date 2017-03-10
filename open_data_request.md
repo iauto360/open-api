@@ -21,7 +21,7 @@ https://open.iauto360.cn/srv/{服务号}/{openId}/{验证签名}
 #### 描述
 
 #### 例子
-<code>
+``` json
 	{
 		"time":1468024618564,
 		"data":{
@@ -29,4 +29,4 @@ https://open.iauto360.cn/srv/{服务号}/{openId}/{验证签名}
 		},
 		"plan":1008
 	}
-</code>
+```
