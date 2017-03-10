@@ -56,6 +56,7 @@ String signStr = md5(openId + param + secureCdoe + time);
 |data|实际返回的业务数据，内嵌json对象
 |err|当flag为0时，返回的错误说明
 ### 返回例子
+``` json
 {
 	"flag":1,
 	"data":{
@@ -65,3 +66,4 @@ String signStr = md5(openId + param + secureCdoe + time);
 		"voltage":13.2
 	}
 }
+```
