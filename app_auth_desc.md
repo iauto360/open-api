@@ -2,9 +2,9 @@
 
 ### 接入前提
 
-1. 向车智汇申请一个appid（目前由人工指定）<br/>
+1. 向车智汇申请一个appid<br/>
     例如:2of7u147s7dEulAJkx9rPNtwsAc
-2. 设置一个签名密钥salt（目前由人工指定），salt作为双方通讯验证对方的安全密钥，需要严格保密这个salt串<br/>
+2. 设置一个签名密钥salt，salt作为双方通讯验证对方的安全密钥，需要严格保密这个salt串<br/>
     例如:GIx8VA8x6RhFXwp
 
 ### 接入流程图
