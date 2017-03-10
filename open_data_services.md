@@ -6,7 +6,7 @@
 <ul>
 <li>协议:HTTPS</li>
 <li>服务号:1011</li>
-<li>地址:`https://open.iauto360.cn/srv/1011/{openId}/{验证签名}`</li>
+<li>`地址:https://open.iauto360.cn/srv/1011/{openId}/{验证签名}`</li>
 </ul>
 ### 请求参数
 |字段名称|类型|必须|说明
