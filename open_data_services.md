@@ -17,11 +17,11 @@
 ### 请求范例
 ``` json
 {
-		"time":1468024618564,
-		"data":{
-			"esn":"861677033025167"
-		},
-		"plan":1008
+	"time":1468024618564,
+	"data":{
+		"esn":"861677033025167"
+	},
+	"plan":1008
 }
 ```
 ### 返回数据
@@ -61,7 +61,7 @@
 |---|---|---|-----
 |time	|Int64|	是|	请求时间，采用unix时间，精确到毫秒
 |data	|Object|	是|	请求实际参数，内嵌json对象
-|data.esn	String|	是	|终端编号
+|data.esn	|String|	是	|终端编号
 |data.timeFrom	|Int64	|是	|点火时间，范围查询开始时间，unix时间，精确到秒
 |data.timeTo|	Int64	|是|	点火时间，范围查询结束时间，unix时间，精确到秒
 |data.page|	Int32|	否|	页码，不传该参数，默认为1，每页数据为10条
@@ -105,21 +105,19 @@
 {
 	"flag":1,
 	"data":{
-		"records":[
-			{
-				"id":123332,
-				"startTime":1483212344,
-				"endTime":1483216462,
-				"mileage":60.4,
-				"avgOil":7.3,
-				"totalOil":4.41,
-				"rapidAccelerate":1,
-				"rapidBreak":2,
-				"hotTime":23,
-				"idleTime":285,
-				"maxSpeed":93.2
-			}
-		],
+		"records":[{
+			"id":123332,
+			"startTime":1483212344,
+			"endTime":1483216462,
+			"mileage":60.4,
+			"avgOil":7.3,
+			"totalOil":4.41,
+			"rapidAccelerate":1,
+			"rapidBreak":2,
+			"hotTime":23,
+			"idleTime":285,
+			"maxSpeed":93.2
+		}],
 		"totalCount":11,
 		"page":2
 	}
@@ -214,27 +212,25 @@
 |data.records[].time	|Int32|	是|	发生时间，unix时间，精确到秒
 |data.records[].location|	Array	|否	|发生地点坐标，采用GCJ-02坐标系：[经度,纬度]
 |data.records[].text	|String|	否|	提醒描述
-|data.totalCount	Int32	|是|	总记录数
+|data.totalCount	|Int32	|是|	总记录数
 |page	|Int32|	是	|数据所在页码
 ### 返回范例
 ``` json
 {
 	"flag":1,
 	"data":{
-		"records":[
-			{
-				"id":34567,
-				"esn":"861677033025167",
-				"type":"安防",
-				"time":1468028564,
-				"location":[113.353982,23.149862],
-			},{
-				"id":34567,
-				"esn":"861677033025167",
-				"type":"启动",
-				"time":1468028564
-			}
-		],
+		"records":[{
+			"id":34567,
+			"esn":"861677033025167",
+			"type":"安防",
+			"time":1468028564,
+			"location":[113.353982,23.149862],
+		},{
+			"id":34567,
+			"esn":"861677033025167",
+			"type":"启动",
+			"time":1468028564
+		}],
 		"totalCount":32,
 		"page":4
 	}
@@ -258,11 +254,11 @@
 ### 请求范例
 ``` json
 {
-		"time":1468024618564,
-		"data":{
-			"esn":"861677033025167"
-		},
-		"plan":1008
+	"time":1468024618564,
+	"data":{
+		"esn":"861677033025167"
+	},
+	"plan":1008
 }
 ```
 ### 返回数据
