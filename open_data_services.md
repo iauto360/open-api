@@ -85,7 +85,7 @@
 |---|---|---|-----
 |flag	|Int32|	是	|请求接口的状态（ 1 成功 0 失败）
 |data	|Object|是|	实际返回的业务数据，内嵌json对象
-|data.records	Array|	否|	行车记录数组
+|data.records|	Array|	否|	行车记录数组
 |data.records[].id|	Long|	是	|行车记录唯一ID
 |data.records[].startTime|	Long	|是|	点火时间，unix时间，精确到秒
 |data.records[].endTime|	Long|	是|	熄火时间，unix时间，精确到秒
