@@ -149,6 +149,7 @@
 |data.records[].hotTime	|Int32|	是|	热车时间，单位为秒
 |data.records[].idleTime|	Int32	|是|	怠速时长，单位为秒
 |data.records[].maxSpeed	|Float|	是	|最快速度，单位为公里/每小时
+|data.records[].avgSpeed	|Float|	是	|平均速度，单位为公里/每小时
 |data.totalCount	|Int32|	是|	总记录数
 |page	|Int32|	是	|数据所在页码
 |err|	Int32	|否	|当flag为0时，返回的错误说明
