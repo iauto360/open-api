@@ -7,7 +7,7 @@
 ## 接口服务调用
 ### 服务地址
 
-https://open.iauto360.cn/srv/{服务号}/{openId}/{验证签名}
+`https://open.iauto360.cn/srv/{服务号}/{openId}/{验证签名}`
 
 |字段名称|说明
 |----|----------
