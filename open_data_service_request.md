@@ -42,6 +42,7 @@
 <li>转为全小写</li>
 </ol>
 #### 伪代码
+
 ``` java
 String openId = "your openid";
 String secureCode = "your securecode";
@@ -49,6 +50,7 @@ Long time = now();
 String param = JSON({"time":1477484314,......});
 String signStr = md5(openId + param + secureCdoe + time);
 ```
+
 ### 接口返回
 采用JSON格式的字符串返回查询结果
 #### 返回内容说明
