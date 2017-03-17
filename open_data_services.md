@@ -81,7 +81,7 @@
 |flag|Int32|	是|	请求接口的状态（ 1 成功 0 失败）
 |data|Object|	是|	实际返回的业务数据，内嵌json对象
 |data.faultCode|	Array|	否|	故障码，不存在该字段或数据为空表示当前无故障码
-|data.isdriving|	Int32	|否|是否在行驶中，0-停车状态,1-行驶中
+|data.driving|	Int32	|否|是否在行驶中，0-停车状态,1-行驶中
 |data.location|	Array	|否|	最后上传坐标，采用GCJ-02坐标系：[经度,纬度]
 |data.mileage|	Float|	否	|总里程，单位为公里
 |data.voltage	|Float	|否	|最后上传电瓶电压
