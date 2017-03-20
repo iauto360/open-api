@@ -32,6 +32,7 @@
 |data	|Object	|是	|实际返回的业务数据，内嵌json对象
 |data.bindStatus	|Int32	|是|	终端绑定状态：0-未绑定，1-已绑定
 |data.mobile|	String|	否|	绑定的手机号码
+|data.userName| String| 否|如果绑定的非手机用户，返回用户名|
 |data.plateNo	|String|	否|	绑定的车牌号码
 |data.inserted|	Int16	|否|	是否插入状态:0-拔出,1-插入
 |data.activeTime	|Int64|	否	|最后数据时间,采用unix时间，精确到秒
