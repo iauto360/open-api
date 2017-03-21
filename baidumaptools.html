@@ -3,11 +3,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
-	<title>百度地图小工具</title>
+    <title>百度地图小工具</title>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=58b61a361662519a9cad42cf913d24bc"></script>
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=58b61a361662519a9cad42cf913d24bc"></script>
     <style type="text/css">
         body, html {
             width: 100%;
@@ -206,6 +207,10 @@
         .ui-dialog .ui-dialog-buttonpane {
             padding: 0px;
         }
+
+        .text {
+            margin: 3px;
+        }
     </style>
 </head>
 <body>
@@ -259,6 +264,7 @@
             <button id="g2b" class="col2">火星->百度</button>
             <button id="o2b" class="col2">原始->百度</button>
             <button id="setCity" class="col2">跳转到地点</button>
+            <button id="setNav" class="col2">驾车线路</button>
         </div>
     </fieldset>
     <fieldset>
@@ -280,13 +286,22 @@
     <label for="cityName">地点</label>
     <input type="text" id="cityName" value="" class="text ui-widget-content ui-corner-all"/>
 </div>
+<div id="nav-dialog" title="导航">
+    <label for="startPlace">起点</label>
+    <input type="text" id="startPlace" value="" class="text ui-widget-content ui-corner-all"/><br/>
+    <label for="endPlace">终点</label>
+    <input type="text" id="endPlace" value="" class="text ui-widget-content ui-corner-all"/>
+</div>
+<div id="nav-result">
+
+</div>
 </body>
 </html>
 <script type="text/javascript">
     var map;
     var markIcon = null;
     var workingJob = "";
-    var dialog;
+    var cityDialog, navDialog;
     var zoom = 14;
     var addMarkerOnclick = function (e) {
         addPoint2Input(e.point.lng, e.point.lat);
@@ -339,20 +354,38 @@
             }
         });
         $("#progressbar-container").hide();
-        dialog = $("#city-dialog").dialog({
+        cityDialog = $("#city-dialog").dialog({
             autoOpen: false,
             height: 110,
             width: 350,
             modal: true,
             buttons: {
                 "跳转": function () {
-                    if($("#cityName").val().trim() != "") {
+                    if ($("#cityName").val().trim() != "") {
                         map.centerAndZoom($("#cityName").val().trim(), zoom);
-                        dialog.dialog("close");
+                        cityDialog.dialog("close");
                     }
                 },
                 "取消": function () {
-                    dialog.dialog("close");
+                    cityDialog.dialog("close");
+                }
+            }
+        });
+        navDialog = $("#nav-dialog").dialog({
+            autoOpen: false,
+            height: 140,
+            width: 350,
+            modal: true,
+            buttons: {
+                "获取线路": function () {
+                    if ($("#startPlace").val().trim() != "" && $("#endPlace").val().trim() != "") {
+                        var driving = new BMap.DrivingRoute(map, {renderOptions: {map: map, autoViewport: true}});
+                        driving.search($("#startPlace").val().trim(), $("#endPlace").val().trim());
+                        navDialog.dialog("close");
+                    }
+                },
+                "取消": function () {
+                    navDialog.dialog("close");
                 }
             }
         });
@@ -389,7 +422,10 @@
             calDistance(points);
         });
         $("#setCity").click(function () {
-            dialog.dialog("open");
+            cityDialog.dialog("open");
+        });
+        $("#setNav").click(function () {
+            navDialog.dialog("open");
         });
         $("#formatInput").click(function () {
             var points = parsePoints();
@@ -431,7 +467,7 @@
         if (gpsType === "5") {
             jobHandler(points, 0);
         } else {
-            translate(points, gtype, function (newPoints) {
+            doTranslate(points, gpsType, 0, function (newPoints) {
                 jobHandler(newPoints, 0);
             });
         }
@@ -507,7 +543,7 @@
         var count = pointsArr.length;
         var points = [];
         for (var i = 0; i < count - 1; i = i + 2) {
-            points.push(new BMap.Point(pointsArr[i], pointsArr[i + 1]));
+            points.push(new BMap.Point(pointsArr[i].length > 10 ? pointsArr[i].substr(0, 10) : pointsArr[i], pointsArr[i + 1].length > 10 ? pointsArr[i + 1].substr(0, 10) : pointsArr[i + 1]));
         }
         return points;
     }
@@ -519,11 +555,27 @@
         ps += "[" + lng + "," + lat + "]";
         $("#points").val(ps);
     }
-    function translate(points, from, callback) {
+    var batchCount = 10;
+    function doTranslate(points, from, idx, callback, newContainer) {
+        if (!newContainer) {
+            newContainer = {};
+            newContainer.points = [];
+        }
         var convert = new BMap.Convertor();
-        convert.translate(points, from, 5, function (data) {
+        if (idx >= points.length) {
+            callback(newContainer.points);
+            return;
+        }
+        var oldPoints;
+        if (points.length > idx + batchCount) {
+            oldPoints = points.slice(idx, idx + batchCount);
+        } else {
+            oldPoints = points.slice(idx, points.length);
+        }
+        convert.translate(oldPoints, from, 5, function (data) {
             if (data.status === 0 && data.points.length > 0) {
-                callback(data.points);
+                newContainer.points = newContainer.points.concat(data.points);
+                doTranslate(points, from, idx + batchCount, callback, newContainer);
             }
         });
     }
