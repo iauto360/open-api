@@ -1,9 +1,9 @@
 ## 车智汇车联网开放数据服务
 
 
-### 接口基础数据
+### 基础数据
 
-### 获取车品牌清单。
+### 获取车品牌清单
 
 ### 接口
 
@@ -164,7 +164,7 @@
 
    ### 终端状况
 
-获取终端的当前绑定信息。
+  ### 获取终端的当前绑定信息。
 
 ### 接口
 
@@ -445,7 +445,7 @@
 | data.records[].hotTime         | Int32    | 是       | 热车时间，单位为秒               |
 | data.records[].idleTime        | Int32    | 是       | 怠速时长，单位为秒               |
 | data.records[].maxSpeed        | Float    | 是       | 最快速度，单位为公里/每小时      |
-| data.totalCount                | Int32    | 是       | 总记录数                         |
+| totalCount                	 | Int32    | 是       | 总记录数                         |
 | page                           | Int32    | 是       | 数据所在页码                     |
 | err                            | Int32    | 否       | 当flag为0时，返回的错误说明      |
 
@@ -457,19 +457,19 @@
 	"data":{
 		"records":[
 			"id":1,
-			"startTime":13820001828,
-			"endTime":"粤AD12345",
-			"mileage":1,
-			"avgOil":1468028564,
-			"totalOil":1468028564,
-			"rapidAccelerate":1468028564,
-			"rapidBreak":1468028564,
-			"hotTime":1468028564,
-			"idleTime":1468028564,
-			"maxSpeed":1468028564,
+			"startTime":1483212344,
+			"endTime":1483216462,
+			"mileage":60.4,
+			"avgOil":7.3,
+			"totalOil":4.41,
+			"rapidAccelerate":1,
+			"rapidBreak":2,
+			"hotTime":23,
+			"idleTime":285,
+			"maxSpeed":93.2,
 		],
-		"totalCount":1468028564,
-		"page":1468028564
+		"totalCount":11,
+		"page":2
 	}
 }
 ```
@@ -516,7 +516,7 @@
 | data          | Object   | 是       | 实际返回的业务数据，内嵌json对象 |
 | data.coords   | Array    | 否       | 轨迹坐标数组，按时间先后排序     |
 | data.coords[] | Float    | 是       | 采用GCJ-02坐标系：[经度,纬度]    |
-| err           | Int32    | 否       | 当flag为0时，返回的错误说明      |
+| err           | String    | 否       | 当flag为0时，返回的错误说明      |
 
 ### 返回范例
 
@@ -702,8 +702,8 @@
 
 | 协议   | HTTPS                                                 |
 |--------|-------------------------------------------------------|
-| 服务号 | 1016                                                  |
-| 地址   | https://open.iauto360.cn/srv/1016/{openId}/{验证签名} |
+| 服务号 | 1017                                                  |
+| 地址   | https://open.iauto360.cn/srv/1017/{openId}/{验证签名} |
 
 ### 请求参数
 
@@ -764,7 +764,7 @@
  车辆体检结果
 -------------
 
-获取终端当前绑定的车辆最后一次车辆体检结果。
+获取终端当前绑定的车辆最后一次车辆体检结果
 
 ### 接口
 
@@ -893,7 +893,7 @@
 
 4.  更新时间：类型Int32，不为空，未上传过数据时为0，采用unix时间，精确到秒
 
-    1.  返回范例
+ ###   返回范例
 
 ``` json
 {
