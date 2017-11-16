@@ -419,7 +419,7 @@
 | 协议   | HTTPS                                                 |
 |--------|-------------------------------------------------------|
 | 服务号 | 1012                                                  |
-| 地址   | `https://open.iauto360.cn/srv/1012/{openId}/{验证签名` |
+| 地址   | `https://open.iauto360.cn/srv/1012/{openId}/{验证签名}` |
 
 ### 请求参数
 
@@ -610,7 +610,7 @@
 | data.records[].time     | Int32    | 是       | 发生时间，unix时间，精确到秒                |
 | data.records[].location | Array    | 否       | 发生地点坐标，采用GCJ-02坐标系：[经度,纬度] |
 | data.records[].text     | String   | 否       | 提醒描述                                    |
-| totalCount         | Int32    | 是       | 总记录数                                    |
+| totalCount              | Int32    | 是       | 总记录数                                    |
 | page                    | Int32    | 是       | 数据所在页码                                |
 
 ### 返回范例
