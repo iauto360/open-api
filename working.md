@@ -856,7 +856,7 @@
 | data.fireTemplate         | Int32    | 否       | 点火正时,传输值为原值100倍，使用时需要除100,原值单位为°             |
 | data.steamPress           | Int32    | 否       | 蒸发系统压力,传输值为原值100倍，使用时需要除100,原值单位为kPa       |
 | data.streamWash           | Int32    | 否       | 蒸发冲洗控制,传输值为原值100倍，使用时需要除100,原值单位为%         |
-| data.vacuumPress          | Int32    | 否       | 歧管真空度油轨压力,传输值为原值100倍，使用时需要除100,原值单位为kPa |
+| data.vacuumPress          | Int32    | 否       | 歧管真空度油轨压力,传输值为原值100倍，<br>使用时需要除100,原值单位为kPa |
 | data.catalyzatorTemplate  | Int32    | 否       | B1S1催化器温度,传输值为原值100倍，使用时需要除100,原值单位为℃       |
 | data.catalyzator2Template | Int32    | 否       | B1S2催化器温度,传输值为原值100倍，使用时需要除100,原值单位为℃       |
 | data.catalyzator3Template | Int32    | 否       | B2S1催化器温度,传输值为原值100倍，使用时需要除100,原值单位为℃       |
