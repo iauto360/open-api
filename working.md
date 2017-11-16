@@ -475,24 +475,25 @@
 
 ``` json
 {
-	"flag": 1,
-	"data": {
+	"flag":1,
+	"data":{
 		"records":[
-			"id": 1,
-			"startTime": 1483212344,
-			"endTime": 1483216462,
-			"mileage": 60.4,
-			"avgOil": 7.3,
-			"totalOil": 4.41,
-			"rapidAccelerate": 1,
-			"rapidBreak": 2,
-			"hotTime": 23,
-			"idleTime": 285,
-			"maxSpeed": 93.2
+			"id":1,
+			"startTime":1483212344,
+			"endTime":1483216462,
+			"mileage":60.4,
+			"avgOil":7.3,
+			"totalOil":4.41,
+			"rapidAccelerate":1,
+			"rapidBreak":2,
+			"hotTime":23,
+			"idleTime":285,
+			"maxSpeed":93.2
 		],
 		"totalCount":11,
 		"page":2
 	}
+		
 }
 ```
 
