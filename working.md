@@ -1433,7 +1433,7 @@
 		"avgSpeed":63,
 		"breakTimes":1349,
 		"cost":301
-		"goodWaterPercent":14,
+		"goodWaterPercent":13,
 		"idlePercent":19,
 		"idleTime":300,
 		"mileage":422,
