@@ -1432,8 +1432,8 @@
 		"avgOilConsume":1280,
 		"avgSpeed":63,
 		"breakTimes":1349,
-		"cost":301
-		"goodWaterPercent":13,
+		"cost":301,
+		"goodWaterPercent":14,
 		"idlePercent":19,
 		"idleTime":300,
 		"mileage":422,
