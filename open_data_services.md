@@ -157,7 +157,7 @@ Table of Contents
 	"time":1468024618564,
 	"data":{
  	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -224,7 +224,7 @@ Table of Contents
 	"data":{
 		"brandId":12
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -325,7 +325,7 @@ Table of Contents
 	"data":{
 		"esn":"86127667888972656"
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -380,7 +380,8 @@ Table of Contents
 | data            | Object   | 是       | 请求实际参数，内嵌json对象                            |
 | data.esn        | String   | 否       | 终端编号，与激活码不能同时为空，两者都不为空，采用esn |
 | data.activeCode | String   | 否       | 激活码，与终端编号不能同时为空，两者都不为空，采用esn |
-| data.mobileNo   | String   | 是       | 手机号码                                              |
+| data.mobileNo   | String   | 否       | 手机号码，与cid不能同时为空                           |
+| data.cid   	  | String   | 否       | 合作方车辆（用户）编号，与mobileNo不能同时为空        |
 | plan            | Int32    | 否       | 计费计划，不传该参数，将会自动匹配适用的计费计划      |
 
 ### 请求范例
@@ -434,7 +435,8 @@ Table of Contents
 | time          | Int64    | 是       | 请求时间，采用unix时间，精确到毫秒                    |
 | data          | Object   | 是       | 请求实际参数，内嵌json对象                            |
 | data.esn      | String   | 是       | 终端编号，与激活码不能同时为空，两者都不为空，采用esn |
-| data.mobileNo | String   | 是       | 手机号码                                              |
+| data.mobileNo | String   | 否       | 手机号码，与cid不能同时为空                           |
+| data.cid   	| String   | 否       | 合作方车辆（用户）编号，与mobileNo不能同时为空        |
 | plan          | Int32    | 否       | 计费计划，不传该参数，将会自动匹配适用的计费计划      |
 
 ### 请求范例
@@ -500,7 +502,7 @@ Table of Contents
 	"data":{
 		"esn":"86127667888972656"
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -571,7 +573,7 @@ Table of Contents
 		"timeTo":1468024618564,
 		"page":2
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -657,7 +659,7 @@ Table of Contents
 		"esn":"86127667888972656",
 		"recordId":1468024618564
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -721,7 +723,7 @@ Table of Contents
 		"timeTo":1468024618564,
 		"page":2
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -799,7 +801,7 @@ Table of Contents
 	"data":{
 		"recordId":86127667888972656
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -851,7 +853,7 @@ Table of Contents
 		"esn":"86127667888972656",
 		"id":86127667888972656
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -936,7 +938,7 @@ Table of Contents
 	"data":{
 		"esn":"86127667888972656"
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -1008,7 +1010,7 @@ Table of Contents
 	"data":{
 		"esn":"86127667888972656"
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -1087,7 +1089,7 @@ Table of Contents
 	"data":{
 		"esn":"86127667888972656"
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -1160,7 +1162,7 @@ Table of Contents
 	"data":{
 		"esn":"86127667888972656"
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -1242,7 +1244,7 @@ Table of Contents
 	"data":{
 		"esn":"86127667888972656"
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -1298,7 +1300,7 @@ Table of Contents
 		"esn":"86127667888972656",
 		"opCode":"UNLOCK_DOOR"
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -1358,7 +1360,7 @@ Table of Contents
 	"data":{
 		"esn":"86127667888972656"
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -1419,7 +1421,7 @@ Table of Contents
 	"data":{
 		"esn":"86127667888972656"
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -1496,7 +1498,7 @@ Table of Contents
 	"data":{
 		"esn":"86127667888972656"
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
@@ -1573,7 +1575,7 @@ Table of Contents
 	"data":{
 		"esn":"86127667888972656"
 	},
-	"plan":1008
+	"plan":1001
 }
 ```
 
