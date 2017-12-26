@@ -1583,12 +1583,12 @@
 | data                                   | Object | 是      | 实际返回的业务数据，内嵌json对象 |
 | data.total                             | long   | 是      | 违章记录总数             |
 | data.errorMsg                          | Int32  | 是      | 错误信息               |
-| data.violationList                     | Int32  | 是      | 违章信息列表             |
+| data.violationList                     | Array  | 是      | 违章信息列表             |
 | data.violationList.violationId         | Int32  | 是      | 编号                 |
-| data.violationList.plateNumber         | Int32  | 是      | 车牌号                |
-| data.violationList.violationTime       | Int32  | 是      | 违章时间               |
-| data.violationList.address             | Int32  | 是      | 违章地址               |
-| data.violationList.behaviorDes         | Int32  | 是      | 违法行为               |
+| data.violationList.plateNumber         | String  | 是      | 车牌号                |
+| data.violationList.violationTime       | String  | 是      | 违章时间               |
+| data.violationList.address             | String  | 是      | 违章地址               |
+| data.violationList.behaviorDes         | String  | 是      | 违法行为               |
 | data.violationList.fineAmount          | Int32  | 是      | 违章罚款               |
 | data.violationList.penaltyPoint        | Int32  | 是      | 违章扣分               |
 | data.violationList.secondaryUniqueCode | String | 是      | 违章记录ID，用于下单        |
