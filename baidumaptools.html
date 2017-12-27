@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript"
-            src="http://api.map.baidu.com/api?v=2.0&ak=58b61a361662519a9cad42cf913d24bc"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=YYm3rSUCGhAaGOgfP1Rha2zARmM1AT4X"></script>
     <style type="text/css">
         body, html {
             width: 100%;
@@ -222,9 +221,10 @@
             <textarea id="points" placeholder="坐标点"></textarea>
         </div>
         <div>
-            <button id="cleanInput" class="col3">清空输入</button>
-            <button id="formatInput" class="col3">格式化</button>
-            <button id="clkMark" w="取消取点" i="鼠标取点" class="col3">鼠标取点</button>
+            <button id="cleanInput" class="col2">清空输入</button>
+            <button id="clkMark" w="取消取点" i="鼠标取点" class="col2">鼠标取点</button>
+            <button id="formatInput" class="col2">格式化</button>
+            <button id="chDegree" class="col2">分秒转度小数</button>
         </div>
     </fieldset>
     <fieldset>
@@ -255,7 +255,7 @@
         <div>
             <button id="mark" w="取消标注" i="标注坐标" class="col3">标注坐标</button>
             <button id="line" w="取消播放" i="播放轨迹" class="col3">播放轨迹</button>
-            <button id="distance">计算距离</button>
+            <button id="distance" w="取消计算" i="计算距离" class="col3">计算距离</button>
         </div>
     </fieldset>
     <fieldset>
@@ -265,6 +265,7 @@
             <button id="o2b" class="col2">原始->百度</button>
             <button id="setCity" class="col2">跳转到地点</button>
             <button id="setNav" class="col2">驾车线路</button>
+			<button id="showArea" class="col2">行政区域</button>
         </div>
     </fieldset>
     <fieldset>
@@ -292,6 +293,10 @@
     <label for="endPlace">终点</label>
     <input type="text" id="endPlace" value="" class="text ui-widget-content ui-corner-all"/>
 </div>
+<div id="area-dialog" title="区域边界">
+    <label for="areaName">区域名称</label>
+    <input type="text" id="areaName" value="" class="text ui-widget-content ui-corner-all"/>
+</div>
 <div id="nav-result">
 
 </div>
@@ -301,7 +306,7 @@
     var map;
     var markIcon = null;
     var workingJob = "";
-    var cityDialog, navDialog;
+    var cityDialog, navDialog, showAreaDialog;
     var zoom = 14;
     var addMarkerOnclick = function (e) {
         addPoint2Input(e.point.lng, e.point.lat);
@@ -317,6 +322,9 @@
     };
     var showMarker = function (marks, idx) {
         if (idx >= marks.length || workingJob != "mark") return;
+		if(idx==0){
+			map.centerAndZoom(marks[idx], map.getZoom());
+		}
         addMarker(marks[idx]);
         setProcess(idx, marks.length);
         if (idx + 1 >= marks.length || workingJob != "mark") return;
@@ -326,6 +334,9 @@
     };
     var showLine = function (marks, idx) {
         if (idx + 1 >= marks.length || workingJob != "line") return;
+		if(idx==0){
+			map.centerAndZoom(marks[idx], map.getZoom());
+		}
         drawLine(marks[idx], marks[idx + 1], getColor());
         setProcess(idx, marks.length - 1);
         if (idx + 2 >= marks.length || workingJob != "line") return;
@@ -333,6 +344,33 @@
             showLine(marks, idx + 1);
         }, parseInt($("#slider").slider("value")));
     };
+	var calDistance = function (marks, idx, total) {
+		if (idx + 1 >= marks.length || workingJob != "distance") return;
+        if(!total) total = 0;
+		setProcess(idx, marks.length - 1);
+        var dis = map.getDistance(marks[idx], marks[idx + 1]);
+        drawLine(marks[idx], marks[idx + 1], getColor(), dis.toFixed(2));
+        total += dis;
+        println("[" + marks[idx].lng + "," + marks[idx].lat + "]-[" + marks[idx + 1].lng + "," + marks[idx + 1].lat + "]->" + dis.toFixed(2));
+		if(idx + 2 >= marks.length) {
+			println("总距离为:" + total.toFixed(2));
+			drawLine(marks[0], marks[idx + 1], getColor(), "总距离:" + total.toFixed(2), "dashed");
+		}
+		if (idx + 2 >= marks.length || workingJob != "distance") return;
+		setTimeout(function () {
+            calDistance(marks, idx + 1, total);
+        }, parseInt($("#slider").slider("value")));
+    };
+	var formatPoints = function (points){
+		var pointsStr = "";
+        for (var idx = 0; idx < points.length; idx++) {
+           pointsStr += "[" + points[idx].lng + "," + points[idx].lat + "],";
+        }
+        if (pointsStr.length > 0) {
+           pointsStr = pointsStr.substr(0, pointsStr.length - 1);
+        }
+		return pointsStr;
+	};
     $(function () {
         map = new BMap.Map("map", {enableMapClick: false});
         map.centerAndZoom(new BMap.Point(113.331336, 23.143739), zoom);
@@ -389,6 +427,31 @@
                 }
             }
         });
+		showAreaDialog = $("#area-dialog").dialog({
+            autoOpen: false,
+            height: 140,
+            width: 350,
+            modal: true,
+            buttons: {
+                "获取区域边界": function () {
+                    if ($("#areaName").val().trim() != "") {
+                        var bdary = new BMap.Boundary();
+						bdary.get($("#areaName").val().trim(), function(rs) {
+							if(rs.boundaries[0]){
+								var ps = rs.boundaries[0].replace(/;/g,",").trim();
+								ps = parsePointsStr(ps);
+								workingJob = "line";
+								showLine(ps,0);
+							}
+						});
+						showAreaDialog.dialog("close");
+                    }
+                },
+                "取消": function () {
+                    showAreaDialog.dialog("close");
+                }
+            }
+        });
         $("#mark").click(function () {
             doPointsJob($(this), showMarker);
         });
@@ -397,11 +460,11 @@
         });
         $("#g2b").click(function () {
             var points = parsePoints();
-            translate(points, 3, translatePrint);
+            doTranslate(points, 3,0, translatePrint);
         });
         $("#o2b").click(function () {
             var points = parsePoints();
-            translate(points, 1, translatePrint);
+            doTranslate(points, 1,0, translatePrint);
         });
         $("#clkMark").click(function () {
             $this = $(this);
@@ -418,8 +481,9 @@
             }
         });
         $("#distance").click(function () {
-            var points = parsePoints();
-            calDistance(points);
+			doPointsJob($(this),calDistance);
+            //var points = parsePoints();
+            //calDistance(points);
         });
         $("#setCity").click(function () {
             cityDialog.dialog("open");
@@ -427,11 +491,20 @@
         $("#setNav").click(function () {
             navDialog.dialog("open");
         });
+		$("#showArea").click(function () {
+            showAreaDialog.dialog("open");
+        });
         $("#formatInput").click(function () {
+            var points = parsePoints();
+            $("#points").val(formatPoints(points));
+        });
+        $("#chDegree").click(function () {
             var points = parsePoints();
             var pointsStr = "";
             for (var idx = 0; idx < points.length; idx++) {
-                pointsStr += "[" + points[idx].lng + "," + points[idx].lat + "],";
+                var bLng = parseInt(points[idx].lng);
+                var bLat = parseInt(points[idx].lat);
+                pointsStr += "[" + ((points[idx].lng-bLng)*100/60+bLng) + "," + ((points[idx].lat-bLat)*100/60+bLat) + "],";
             }
             if (pointsStr.length > 0) {
                 pointsStr = pointsStr.substr(0, pointsStr.length - 1);
@@ -459,6 +532,9 @@
         });
         locationTools();
     });
+	function inView(lng,lat) {
+		
+	}
     function doPointsJob(el, jobHandler) {
         var points = parsePoints();
         if (points.length == 0) return;
@@ -537,7 +613,10 @@
     }
     function parsePoints() {
         var pointsStr = $("#points").val().trim();
-        if (pointsStr == "") return [];
+        return parsePointsStr(pointsStr);
+    }
+	function parsePointsStr(pointsStr) {
+		if (pointsStr == "") return [];
         pointsStr = pointsStr.replace(/[\s|\]|\[]+/g, "");
         var pointsArr = pointsStr.split(",");
         var count = pointsArr.length;
@@ -545,8 +624,8 @@
         for (var i = 0; i < count - 1; i = i + 2) {
             points.push(new BMap.Point(pointsArr[i].length > 10 ? pointsArr[i].substr(0, 10) : pointsArr[i], pointsArr[i + 1].length > 10 ? pointsArr[i + 1].substr(0, 10) : pointsArr[i + 1]));
         }
-        return points;
-    }
+		return points;
+	}
     function addPoint2Input(lng, lat) {
         var ps = $("#points").val().trim();
         if (ps.length > 0 && !ps.endsWith(",")) {
