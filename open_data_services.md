@@ -403,7 +403,7 @@ B:单个绑定
 {
 	"flag":1,
 	"data":{
-	     status:1
+	     "status":1
 	}
 }
 ```
