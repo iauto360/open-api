@@ -1274,6 +1274,248 @@ B:单个匹配状态
 ***
 ***
 
+## WIFI重置密码
+
+### 接口
+
+| 协议   | HTTPS                                    |
+| ---- | ---------------------------------------- |
+| 服务号  | 1030                                   |
+| 地址   | `https://open.iauto360.cn/srv/1030/{openId}/{验证签名}` |
+
+### 请求参数
+
+| **字段名称** | **类型** | **必须** | **说明**                   |
+| -------- | ------ | ------ | ------------------------ |
+| time     | Int64  | 是      | 请求时间，采用unix时间，精确到毫秒      |
+| data     | Object | 是      | 请求实际参数，内嵌json对象          |
+| data.esn     | String | 是      | 终端编号          |
+| plan     | Int32  | 否      | 计费计划，不传该参数，将会自动匹配适用的计费计划 |
+
+### 请求范例
+
+``` json
+{
+	"time":1468024618564,
+	"data":{
+		"esn":"86127667888972656"
+ 	},
+	"plan":1001
+}
+```
+
+### 返回数据
+
+| **字段名称**            | **类型** | **必须** | **说明**               |
+| ------------------- | ------ | ------ | -------------------- |
+| flag                | Int32  | 是      | 请求接口的状态（ 1 成功 0 失败）  |
+| data                | Object | 是      | 实际返回的业务数据，内嵌json对象   |
+| data.password        | String  | 是      | 重置后的新密码    |
+
+### 返回范例
+``` json
+{
+	"flag":1,
+	"data":{
+        "password": "12345678"
+    }
+}
+```
+
+***
+***
+
+## 获取WIFI状态
+
+### 接口
+
+| 协议   | HTTPS                                    |
+| ---- | ---------------------------------------- |
+| 服务号  | 1031                                   |
+| 地址   | `https://open.iauto360.cn/srv/1031/{openId}/{验证签名}` |
+
+### 请求参数
+
+| **字段名称** | **类型** | **必须** | **说明**                   |
+| -------- | ------ | ------ | ------------------------ |
+| time     | Int64  | 是      | 请求时间，采用unix时间，精确到毫秒      |
+| data     | Object | 是      | 请求实际参数，内嵌json对象          |
+| data.esn     | String | 是      | 终端编号          |
+| plan     | Int32  | 否      | 计费计划，不传该参数，将会自动匹配适用的计费计划 |
+
+### 请求范例
+
+``` json
+{
+	"time":1468024618564,
+	"data":{
+		"esn":"86127667888972656"
+ 	},
+	"plan":1001
+}
+```
+
+### 返回数据
+
+| **字段名称**            | **类型** | **必须** | **说明**               |
+| ------------------- | ------ | ------ | -------------------- |
+| flag                | Int32  | 是      | 请求接口的状态（ 1 成功 0 失败）  |
+| data                | Object | 是      | 实际返回的业务数据，内嵌json对象   |
+| data.status        | String  | 是      | wifi状态,1-正常,2-重置密码过程中    |
+
+### 返回范例
+``` json
+{
+	"flag":1,
+	"data":{
+        "status": "1"
+    }
+}
+```
+
+***
+***
+
+## 数据流量详情
+
+### 接口
+
+| 协议   | HTTPS                                    |
+| ---- | ---------------------------------------- |
+| 服务号  | 1032                                   |
+| 地址   | `https://open.iauto360.cn/srv/1032/{openId}/{验证签名}` |
+
+### 请求参数
+
+| **字段名称** | **类型** | **必须** | **说明**                   |
+| -------- | ------ | ------ | ------------------------ |
+| time     | Int64  | 是      | 请求时间，采用unix时间，精确到毫秒      |
+| data     | Object | 是      | 请求实际参数，内嵌json对象          |
+| data.esn     | String | 是      | 终端编号          |
+| data.pageSize     | String | 否      | 不传默认10          |
+| data.lastTime     | String | 是      | 首页不传，用于分页 unix 时间戳          |
+| plan     | Int32  | 否      | 计费计划，不传该参数，将会自动匹配适用的计费计划 |
+
+### 请求范例
+
+``` json
+{
+	"time":1468024618564,
+	"data":{
+		"esn":"86127667888972656"
+ 	},
+	"plan":1001
+}
+```
+
+### 返回数据
+
+| **字段名称**            | **类型** | **必须** | **说明**               |
+| ------------------- | ------ | ------ | -------------------- |
+| flag                | Int32  | 是      | 请求接口的状态（ 1 成功 0 失败）  |
+| data                | Object | 是      | 实际返回的业务数据，内嵌json对象   |
+| data.dataMonthList                                                     | Array  | 是      | 流量结算月信息集合    |
+| data.dataMonthList[].yearMonth                                 | String  | 是      | 结算年月，例：2018-1   |
+| data.dataMonthList[].fromDate                                   | String | 是      | 起点结算月日，例：12.27   |
+| data.dataMonthList[].endDate        		                     | String  | 是      | 终止结算月日，例：12.28    |
+| data.dataMonthList[].lastTime                                   | Long | 是      | 终止结算月日 unix 时间戳，用于分页传值	   |
+| data.dataMonthList[].monthCost        	                     | String  | 是      | 月花费流量，单位mb    |
+| data.dataMonthList[].dayCostMax	                             | String  | 是      | 当月日花费流量最大值 ，单位mb    |
+| data.dataMonthList[].dataDailyInfoList	                     | Array | 是      | 指定月中日流量记录详情集合   |
+| data.dataMonthList[].dataDailyInfoList[].dateNum        | String | 是      | 日期，例：  "28日"|
+| data.dataMonthList[].dataDailyInfoList[].dailyCost        | String  | 是      | 日花费流量，单位mb     |
+
+### 返回范例
+``` json
+{
+    "flag": 1,
+    "data": {
+        "dataMonthList": [
+            {
+                "yearMonth": "2018-1",
+                "fromDate": "12.27",
+                "endDate": "12.28",
+                "lastTime": 1514441438,
+                "monthCost": "1.9",
+                "dayCostMax": "1.0",
+                "dataDailyInfoList": [
+                    {
+                        "dateNum": "28日",
+                        "dailyCost": "1.0"
+                    },
+                    {
+                        "dateNum": "27日",
+                        "dailyCost": "0.9"
+                    }
+                ]
+            }
+        ]
+    }
+}
+```
+
+***
+***
+
+## 获取剩余流量
+
+### 接口
+
+| 协议   | HTTPS                                    |
+| ---- | ---------------------------------------- |
+| 服务号  | 1033                                   |
+| 地址   | `https://open.iauto360.cn/srv/1033/{openId}/{验证签名}` |
+
+### 请求参数
+
+| **字段名称** | **类型** | **必须** | **说明**                   |
+| -------- | ------ | ------ | ------------------------ |
+| time     | Int64  | 是      | 请求时间，采用unix时间，精确到毫秒      |
+| data     | Object | 是      | 请求实际参数，内嵌json对象          |
+| data.esn     | String | 是      | 终端编号          |
+| plan     | Int32  | 否      | 计费计划，不传该参数，将会自动匹配适用的计费计划 |
+
+### 请求范例
+
+``` json
+{
+	"time":1468024618564,
+	"data":{
+		"esn":"86127667888972656"
+ 	},
+	"plan":1001
+}
+```
+
+### 返回数据
+
+| **字段名称**            | **类型** | **必须** | **说明**               |
+| ------------------- | ------ | ------ | -------------------- |
+| flag                | Int32  | 是      | 请求接口的状态（ 1 成功 0 失败）  |
+| data                | Object | 是      | 实际返回的业务数据，内嵌json对象   |
+| data.curRemainMonth        | Float  | 是      | 本月剩余 ,单位mb  (月套餐 + 加油包 - 已使用) |
+| data.settlementTime        | Int32  | 是      | 下月结算日时间,unix时间，精确秒 |
+| data.expirationTime        | Int32  | 是      | 套餐到期时间，unix时间，精确秒   |
+| data.dataPlanMonth                | Float | 是      | 月套餐流量,单位mb   |
+| data.dataPlus        | Float  | 是      | 加油包流量,单位mb    |
+
+### 返回范例
+``` json
+{
+    "flag": 1,
+    "data": {
+        "curRemainMonth": 1022.1,
+        "dataPlus": 0,
+        "settlementTime": 1516982400,
+	"expirationTime": 1516982400,
+        "dataPlanMonth": 1024
+    }
+}
+```
+
+***
+***
+
  车辆控制
  ------------
 
