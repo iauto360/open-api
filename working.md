@@ -1707,22 +1707,22 @@
 | ------------------- | ------ | ------ | -------------------- |
 | flag                | Int32  | 是      | 请求接口的状态（ 1 成功 0 失败）  |
 | data                | Object | 是      | 实际返回的业务数据，内嵌json对象   |
-| data.curRemainMonth        | Float  | 是      | 本月剩余 ,单位mb  (月套餐 + 加油包 - 已使用) |
-| data.settlementTime        | String  | 是      | 下月结算日时间  format: yyyy-MM-dd   |
-| data.expirationTime        | String  | 是      | 套餐到期时间  format: yyyy-MM-dd   |
-| data.dataPlanMonth                | Float | 是      | 月套餐流量,单位mb   |
-| data.dataPlus        | Float  | 是      | 加油包流量,单位mb    |
+| data.curRemainMonth        | Int32  | 是      | 本月剩余 ,单位MB  (月套餐 + 加油包 - 已使用)，例：614290表示6142.9MB |
+| data.settlementTime        | String  | 是      | 下月结算日时间  unix时间，精确到秒   |
+| data.expirationTime        | String  | 是      | 套餐到期时间  unix时间，精确到秒   |
+| data.dataPlanMonth                | Int32 | 是      | 月套餐流量,单位MB，例：614400表示6144MB  |
+| data.dataPlus        | Int32  | 是      | 加油包流量,单位MB，例：30000表示300MB    |
 
 ### 返回范例
 ``` json
 {
     "flag": 1,
     "data": {
-        "curRemainMonth": 1022.1,
+        "curRemainMonth": 614290,
+        "settlementTime": 1516982400,
         "dataPlus": 0,
-        "settlementTime": "2018-01-27",
-	"expirationTime": "2018-12-27",
-        "dataPlanMonth": 1024
+        "expirationTime": 1543248000,
+        "dataPlanMonth": 614400
     }
 }
 ```
