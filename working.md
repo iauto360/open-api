@@ -1707,11 +1707,11 @@
 | ------------------- | ------ | ------ | -------------------- |
 | flag                | Int32  | 是      | 请求接口的状态（ 1 成功 0 失败）  |
 | data                | Object | 是      | 实际返回的业务数据，内嵌json对象   |
-| data.curRemainMonth        | Int32  | 是      | 本月剩余 ,单位MB  (月套餐 + 加油包 - 已使用)，例：614290表示6142.9MB |
+| data.curRemainMonth        | Int32  | 是      | 本月剩余 ,单位1/100MB  (月套餐 + 加油包 - 已使用)，例：614290表示6142.9MB |
 | data.settlementTime        | String  | 是      | 下月结算日时间  unix时间，精确到秒   |
 | data.expirationTime        | String  | 是      | 套餐到期时间  unix时间，精确到秒   |
-| data.dataPlanMonth                | Int32 | 是      | 月套餐流量,单位MB，例：614400表示6144MB  |
-| data.dataPlus        | Int32  | 是      | 加油包流量,单位MB，例：30000表示300MB    |
+| data.dataPlanMonth                | Int32 | 是      | 月套餐流量,单位1/100MB，例：614400表示6144MB  |
+| data.dataPlus        | Int32  | 是      | 加油包流量,单位1/100MB，例：30000表示300MB    |
 
 ### 返回范例
 ``` json
