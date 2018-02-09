@@ -14,7 +14,7 @@
 ### 2.2.	传输格式
 采用JSON格式传输事件内容，内容说明
 
-<table border='1',cellspacing='0',cellpadding='0'>
+<table border='1',cellspacing='',cellpadding=''>
 
 <tr>
 <th>字段名称</th>
@@ -183,7 +183,7 @@
 <td>拔出	</td>
 <td>终端被拔出，8小时内多次拔出，只提醒第一次</td>
 <td>智能盒已从【#车牌号码#】拔出，爱车将失去保护！	</td>
-<td></td>
+<td>低</td>
 </tr>
 
 
