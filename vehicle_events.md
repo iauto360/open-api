@@ -120,7 +120,7 @@
     }   
  
 ### 2.4.	详细流程
-[时序图略]或参见某个图片链接
+参见`https://github.com/iauto360/open-api/blob/master/vehicle_events_sequence_chart.png`
  
 1.  从各方面[终端上报/违章查询]监听车辆事件
 2.  监听到车辆相关事件
