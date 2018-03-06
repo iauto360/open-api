@@ -1986,10 +1986,10 @@ B:单个匹配状态
 | -------------------------------------- | ------ | ------ | ------------------ |
 | flag                                   | Int32  | 是      | 请求接口返回信息（0-失败1-成功） |
 | data                                   | Object | 是      | 实际返回的业务数据，内嵌json对象 |
-| data.collisionAlarmStatus              | Integer| 是      | 碰撞提醒状态(0-关闭,1-打开,2正在打开)                 |
-| data.collisionLevelStatus              | Integer| 是      | 碰撞提醒灵敏度(0-强烈,1-轻微)                       |
-| data.vibrationMonitoringStatus         | Integer| 是      | 震动监控状态(0-关闭,1-打开,2正在打开)|
-| data.vibrationSensitivity              | Integer| 是      | 震动监控灵敏度(1-高,2-低,3-正在设置为高,4-正在设置为低,5-中,6-正在设置为中)  |
+| data.collisionAlarmStatus              | Int32| 是      | 碰撞提醒状态(0-关闭,1-打开,2正在打开)                 |
+| data.collisionLevelStatus              | Int32| 是      | 碰撞提醒灵敏度(0-强烈,1-轻微)                       |
+| data.vibrationMonitoringStatus         | Int32| 是      | 震动监控状态(0-关闭,1-打开,2正在打开)|
+| data.vibrationSensitivity              | Int32| 是      | 震动监控灵敏度(1-高,2-低,3-正在设置为高,4-正在设置为低,5-中,6-正在设置为中)  |
  
 
 ### 返回范例
@@ -2024,7 +2024,7 @@ B:单个匹配状态
 | time       | Int64    | 是      | 请求时间，采用unix时间，精确到毫秒      |
 | data       | Object   | 是      | 请求实际参数，内嵌json对象          |
 | data.esn| String     | 是      | OBD终端号     	              |
-| data.collisionAlarmStatus| Integer     | 是      | 碰撞提醒状态(0-关闭,1-打开,2正在打开)       	              |
+| data.collisionAlarmStatus| Int32     | 是      | 碰撞提醒状态(0-关闭,1-打开,2正在打开)       	              |
 | plan       | Int32    | 否      | 计费计划，不传该参数，将会自动匹配适用的计费计划 |
 ### 请求范例
 
@@ -2075,7 +2075,7 @@ B:单个匹配状态
 | time        | Int64    | 是      | 请求时间，采用unix时间，精确到毫秒      |
 | data        | Object   | 是      | 请求实际参数，内嵌json对象          |
 | data.esn | String     | 是      | OBD终端号  |
-| data.collisionLevelStatus| Integer     | 是      | 碰撞提醒灵敏度(0-强烈,1-轻微)      	              |
+| data.collisionLevelStatus| Int32     | 是      | 碰撞提醒灵敏度(0-强烈,1-轻微)      	              |
 | plan        | Int32    | 否      | 计费计划，不传该参数，将会自动匹配适用的计费计划 |
 ### 请求范例
 
@@ -2125,7 +2125,7 @@ B:单个匹配状态
 | time        | Int64    | 是      | 请求时间，采用unix时间，精确到毫秒      |
 | data        | Object   | 是      | 请求实际参数，内嵌json对象          |
 | data.esn    | String     | 是      | OBD终端号     	              |
-| data.vibrationMonitoringStatus| Integer     | 是      | 震动监控状态(0-关闭,1-打开,2正在打开)      	              |
+| data.vibrationMonitoringStatus| Int32     | 是      | 震动监控状态(0-关闭,1-打开,2正在打开)      	              |
 | plan        | Int32    | 否      | 计费计划，不传该参数，将会自动匹配适用的计费计划 |
 ### 请求范例
 
@@ -2175,7 +2175,7 @@ B:单个匹配状态
 | time        | Int64    | 是      | 请求时间，采用unix时间，精确到毫秒      |
 | data        | Object   | 是      | 请求实际参数，内嵌json对象          |
 | data.esn | String     | 是      | OBD终端号     	              |
-| data.vibrationSensitivity| Integer     | 是      |  震动监控灵敏度(1-高,2-低,3-正在设置为高,4-正在设置为低,5-中,6-正在设置为中)    |
+| data.vibrationSensitivity| Int32     | 是      |  震动监控灵敏度(1-高,2-低,3-正在设置为高,4-正在设置为低,5-中,6-正在设置为中)    |
 | plan        | Int32    | 否      | 计费计划，不传该参数，将会自动匹配适用的计费计划 |
 ### 请求范例
 
