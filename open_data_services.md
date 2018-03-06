@@ -1975,9 +1975,8 @@ B:单个匹配状态
 {
 	"time":1468024618564,
 	"data":{
-		"esn":"86127667888972656"
-	},
-	"plan":1001
+		"esn":"352016800410953"
+	}
 }
 ```
 
@@ -2033,11 +2032,12 @@ B:单个匹配状态
 {
 	"time":1468024618564,
 	"data":{
-		"esn":"86127667888972656",
-		"collisionAlarmStatus":1	
-	},
-	"plan":1001
-}
+		"esn":"352016800410953",
+		"collisionAlarmStatus":1
+	}
+
+}		
+
 ```
 
 ### 返回数据
@@ -2050,9 +2050,10 @@ B:单个匹配状态
 
 ``` json
 {
-   "flag":1,
-   "data":{		            
-   }     	  
+    "flag": 1,
+    "data": {
+        "collisionAlarmStatus": 1
+    }
 }
 ```
 ***
@@ -2082,10 +2083,10 @@ B:单个匹配状态
 {
 	"time":1468024618564,
 	"data":{
-		"esn":"86127667888972656",
-		"collisionLevelStatus":0	
-	},
-	"plan":1001
+		"esn":"352016800410953",
+		"collisionLevelStatus":1
+	}
+	
 }
 ```
 
@@ -2099,9 +2100,10 @@ B:单个匹配状态
 
 ``` json
 {
-   "flag":1,
-   "data":{		            
-   }     	  
+    "flag": 1,
+    "data": {
+        "collisionLevelStatus": 1
+    }
 }
 ```
 ***
@@ -2131,10 +2133,9 @@ B:单个匹配状态
 {
 	"time":1468024618564,
 	"data":{
-		"esn":"86127667888972656",
-		"vibrationMonitoringStatus":0	
-	},
-	"plan":1001
+		"esn":"352016800410953",
+		"vibrationMonitoringStatus":1
+	}
 }
 ```
 
@@ -2148,9 +2149,10 @@ B:单个匹配状态
 
 ``` json
 {
-   "flag":1,
-   "data":{		            
-   }     	  
+    "flag": 1,
+    "data": {
+        "vibrationMonitoringStatus": 2
+    }
 }
 ```
 
@@ -2181,10 +2183,9 @@ B:单个匹配状态
 {
 	"time":1468024618564,
 	"data":{
-		"esn":"86127667888972656",
-		"vibrationSensitivity":1	
-	},
-	"plan":1001
+		"esn":"352016800410953",
+		"vibrationSensitivity":5	
+	}
 }
 ```
 
@@ -2198,8 +2199,9 @@ B:单个匹配状态
 
 ``` json
 {
-   "flag":1,
-   "data":{		            
-   }     	  
+    "flag": 1,
+    "data": {
+        "vibrationSensitivity": 6
+    }
 }
 ```
