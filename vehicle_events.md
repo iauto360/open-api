@@ -81,7 +81,7 @@
        
        //把byte转为可视的16进制字符串
        Formatter formatter = new Formatter();
-       for (byte b : hash) {
+       for (byte b : bytes) {
        	formatter.format("%02x", b);
        }
        String verSign = formatter.toString();
