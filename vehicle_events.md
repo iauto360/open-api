@@ -56,40 +56,36 @@
     	]
     	}]
     }   
- 
+
 ### 2.4.	详细流程
 ![](https://github.com/iauto360/open-api/blob/master/vehicle_events_sequence_chart.png)
- 
+
 1.  从各方面[终端上报/违章查询]监听车辆事件
 2.  监听到车辆相关事件
 3.  把事件组装为传输的JSON数据格式字符串events
-4.  通过sha1算法，把该字符串与前提中第2点的验证数据的密文作签名得到verSign
-  
-        //Java范例
-        //16进制字符映射数组
-        char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9','a'};
-        //事件数组JSON字符串
-        String events="{\records\":[{\"id\":123,\"esn\":\"35124...";
-        //双方协商用于一个验证数据的密文
-        String secureCode = "Ax7scb224xf8z";
+4. 通过md5算法，把该字符串与前提中第2点的验证数据的密文作签名得到verSign
 
-        //拼接字符串
-        String signRawStr=events+secureCode;
-        //采用SHA1算法hash字符串
-        MessageDigest messageDigest = MessageDigest.getInstance("SHA1");
-        messageDigest.update(signRawStr.getBytes());
-        byte[] bytes = messageDigest.digest();
-
-        //把byte转为可视的16进制字符串
-        int len = bytes.length;
-        StringBuilder builder = new StringBuilder(len * 2);
-        for(int j=0;j<len;j++){
-            builder.append(HEX_DIGITS[(bytes[j] >4) & 0x0f]);
-            builder.append(HEX_DIGITS[(bytes[j]) & 0x0f]);
-        }
-        String verSign = builder.toString();   
-
-	
+       //Java范例
+       
+       //事件数组JSON字符串
+       String events="{\records\":[{\"id\":123,\"esn\":\"35124...";
+       //双方协商用于一个验证数据的密文
+       String secureCode = "Ax7scb224xf8z";
+       
+       //拼接字符串
+       String signRawStr=events+secureCode;
+       //采用SHA1算法hash字符串
+       MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+       messageDigest.update(signRawStr.getBytes());
+       byte[] bytes = messageDigest.digest();
+       
+       //把byte转为可视的16进制字符串
+       Formatter formatter = new Formatter();
+       for (byte b : hash) {
+       	formatter.format("%02x", b);
+       }
+       String verSign = formatter.toString();
+       formatter.close(); 
 
 5.  POST到前提中第3点合作方提供的http接口，并在参数中增加一个参数versign，值为		上一步得到hash签名
 6. 【合作方】获取POST过来的JSON字符串数据
@@ -117,6 +113,7 @@
 |关锁|远程控制车门关锁操作响应事件，状态：成功/失败|【#车牌号码#】于【#关锁时间#】在 【#地点#】 附近关锁【#状态#】||
 |流量超出|流量使用超出时推送|您的流量已使用【#使用量#】MB，将关闭WIFI功能。|use：使用量|
 |禁入地界|驾驶进禁入地界时触发，10分只提醒一次|请注意！【#车牌号码#】驾驶进禁入地界【#禁止地界名#】|lng: 当前车辆经度 lat: 当前车辆纬度|
+|定位|终端上报定位时触发|||
 
 
 
